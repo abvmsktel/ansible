@@ -1,2 +1,6 @@
-[test]
-test.host
+---
+- hosts: ac2
+  user: abv
+  sudo: yes
+  tasks:
+       - service: name=sshd state=started
