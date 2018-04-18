@@ -1,6 +1,6 @@
 ---
-- hosts: ac2
-  user: abv
+- hosts: 
+  user: 
   sudo: yes
   tasks:
        - service: name=sshd state=started
