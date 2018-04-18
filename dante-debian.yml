@@ -1,0 +1,13 @@
+- hosts: hostname
+  vars:
+    users:
+      - socks_username: 
+        socks_password: 
+    
+      - socks_username: 
+        socks_password: 
+  roles:
+     - role: dante-server
+       dante_internal_interface: ip
+       dante_internal_port: 1080
+       dante_external_interface: ip

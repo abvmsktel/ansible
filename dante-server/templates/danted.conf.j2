@@ -1,0 +1,18 @@
+logoutput: stderr
+internal: {{ dante_internal_interface }} port = {{ dante_internal_port }}
+external: {{ dante_external_interface }}
+
+method: username
+user.privileged: root
+user.notprivileged: nobody
+user.libwrap: nobody
+
+client pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error
+}
+
+pass {
+        from: 0.0.0.0/0 to: 0.0.0.0/0
+        log: error
+}

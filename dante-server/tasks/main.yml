@@ -1,0 +1,36 @@
+---
+# tasks file for dante-server
+
+- name: "Install dante-server"
+  apt:
+    update_cache: yes
+    pkg: "dante-server"
+    state: present 
+  become: yes
+
+- name: "Load config file"
+  template:
+    src: danted.conf.j2
+    dest: "/etc/danted.conf"
+    mode: 0644
+    owner: root
+    group: root
+  notify: 
+    - restart dante
+  become: yes
+
+- name: "Dante service is enabled?"
+  service:
+    name: "danted"
+    enabled: yes
+    use: service
+  become: yes
+
+- name: "Create specified user"
+  with_items: "{{ users }}" 
+  user: 
+    name: "{{ item.socks_username }}"
+    password: "{{ item.socks_password | password_hash('sha512') }}"
+    shell: "/sbin/nologin"
+  when: users is defined
+  become: yes
